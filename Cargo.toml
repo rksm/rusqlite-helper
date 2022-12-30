@@ -1,0 +1,15 @@
+[package]
+name = "rusqlite-helper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+log = "0.4.17"
+rusqlite = { version = "0.28.0", features = ["chrono", "serde_json"] }
+serde = { version = "1.0.152", features = ["derive"] }
+serde_rusqlite = "0.31.0"
+thiserror = "1.0.38"
+
+[dev-dependencies]
+chrono = { version = "0.4.23", features = ["serde"] }
+once_cell = "1.17.0"
