@@ -1,6 +1,5 @@
 //! This is a helper that allows to manage SQLite tables.
 //!
-//!
 //! Example:
 //!
 //! ```rust
