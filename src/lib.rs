@@ -147,13 +147,15 @@ impl Table {
         Ok(())
     }
 
+    /// Insert self into the database, return true if the row was inserted or
+    /// updated, false if ignored.
     pub fn insert(
         &self,
         c: &Connection,
         row: impl serde::Serialize,
         fields: &[&str],
         conflict: InsertConflictResolution<'_>,
-    ) -> Result<usize, RusqliteHelperError> {
+    ) -> Result<bool, RusqliteHelperError> {
         let Self { name, .. } = self;
         let values = {
             let mut values = fields.join(", :");
@@ -179,7 +181,8 @@ impl Table {
             }
         };
         trace!("{sql}");
-        Ok(c.execute(&sql, to_params_named(row).unwrap().to_slice().as_slice())?)
+        let n = c.execute(&sql, to_params_named(row).unwrap().to_slice().as_slice())?;
+        Ok(n != 0)
     }
 
     pub fn query<D: serde::de::DeserializeOwned>(
