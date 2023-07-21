@@ -60,7 +60,7 @@
 //!         }
 //!
 //!         #[rustfmt::skip]
-//!         pub fn insert(&self, db: &Connection) -> Result<usize, rusqlite_helper::RusqliteHelperError> {
+//!         pub fn insert(&self, db: &Connection) -> Result<bool, rusqlite_helper::RusqliteHelperError> {
 //!             Self::table().insert(
 //!                 db, self, &["acct", "id", "name", "display_name", "note", "url", "fetched"],
 //!                 if self.id.is_some() { InsertConflictResolution::Replace } else { InsertConflictResolution::Ignore }
